@@ -2,6 +2,9 @@ const MACRONAME = "Open_Actor_Sheets_With.js"
 /******************************************************************************
  * Macro to find all actors who have a specified item and open their sheets
  * to make replacing items easier.
+ * 
+ * This macro should be run from the hotbar with a (one!) token of interest 
+ * selected in a scene.
  *
  * 12/03/21 0.1 Creation
  * 01/23/22 0.2 Add Front end to enter the item name
@@ -20,13 +23,12 @@ let item = ""
 jez.log(`Beginning ${MACRONAME}`);
 
 let sToken = canvas.tokens.controlled[0]
-jez.log(`Source Token ${sToken.name}`, sToken);
-
 if (!sToken) {
     msg = `Must select one token to be used to find the item that will be searched for.`
     jez.postMessage({color:"crimson", fSize:14, msg:msg, title:`ERROR: Select a Token`})
     return
 }
+jez.log(`Source Token ${sToken.name}`, sToken);
 let sActor = sToken.actor
 let itemsFound = []
 let typesFound = []
@@ -38,9 +40,12 @@ for (let i=0; i < sActor.items.contents.length; i++) {
 jez.log(`Found ${typesFound.length} types}`, typesFound.sort())
 
 
-queryTitle = "What type of thing?"
-queryText = "Pick one from drop down list"
-await jez.pickFromListArray(queryTitle, queryText, typeCallBack, typesFound)
+queryTitle = "What item of type of thing?"
+queryText = "Please, pick one from list below."
+if (typesFound.length > 9)  // If 9 or less, use a radio button dialog
+    await jez.pickFromListArray(queryTitle, queryText, typeCallBack, typesFound.sort())
+else
+    await jez.pickRadioListArray(queryTitle, queryText, typeCallBack, typesFound.sort())
 
 async function typeCallBack(itemType) {
     jez.log("typeCallBack", itemType)
@@ -48,18 +53,20 @@ async function typeCallBack(itemType) {
     //--------------------------------------------------------------------------------------------
     // Find all the item of type "itemType"
     //
-    for (let i=0; i < sActor.items.contents.length; i++) {
+    for (let i = 0; i < sActor.items.contents.length; i++) {
         jez.log(`${i} ${sActor.items.contents[i].data.type} ${sActor.items.contents[i].data.name}`)
         if (sActor.items.contents[i].data.type === itemType) itemsFound.push(sActor.items.contents[i].data.name)
     }
     jez.log(`Found ${itemsFound.length} ${itemType}(s)`, itemsFound.sort())
     //--------------------------------------------------------------------------------------------
-    // From the Items found, ask which shall be searched for now...
+    // From the Items found, ask which item should trigger opening a sheet.
     //
-    queryTitle = "Sheets with which item should be opened?"
-    queryText = "Pick one from drop down list"
-    await jez.pickFromListArray(queryTitle, queryText, itemCallBack, itemsFound.sort())
-
+    queryTitle = "Sheets with with which item should be opened?"
+    queryText = `Pick one from drop down list of ${itemType} item(s)`
+    if (itemsFound.length > 9)  // If 9 or less, use a radio button dialog
+        await jez.pickFromListArray(queryTitle, queryText, itemCallBack, itemsFound.sort())
+    else
+        await jez.pickRadioListArray(queryTitle, queryText, itemCallBack, itemsFound.sort())
 
     function itemCallBack(itemSelected) {
         jez.log("typeCallBack", itemSelected)
@@ -68,7 +75,7 @@ async function typeCallBack(itemType) {
         // Find and open all the actor sheets that contain the selected item
         //
         jez.log("Item Type", itemType)
-        jez.log("Item Seletced", itemSelected)
+        jez.log("Item Selected", itemSelected)
 
         let allActors = game.actors
 
@@ -81,7 +88,7 @@ async function typeCallBack(itemType) {
             }
         }
 
-        msg = `<u>Found ${cntFound} actor(s) with ${itemSelected}</u><br>`
+        msg = `<u>Found ${cntFound} actor(s) with ${itemSelected} ${itemType}</u><br>`
 
         let i = 0;
         console.log(`Searched ${cnt} entities, found ${cntFound} with ${itemSelected} ${itemType}:`)
