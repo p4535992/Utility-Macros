@@ -62,7 +62,7 @@ async function typeCallBack(itemType) {
     // From the Items found, ask which item should trigger opening a sheet.
     //
     queryTitle = "Sheets with with which item should be opened?"
-    queryText = `Pick one from drop down list of ${itemType} item(s)`
+    queryText = `Pick one from list of ${itemType} item(s)`
     if (itemsFound.length > 9)  // If 9 or less, use a radio button dialog
         await jez.pickFromListArray(queryTitle, queryText, itemCallBack, itemsFound.sort())
     else
