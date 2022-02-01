@@ -6,9 +6,10 @@ This readme contains a summary of the functions and for at least some of them a 
 
 ## Functions in this Repo
 
-* **[Open Actor Sheets With...](Open-Actor-Sheets-With...)** fetchs a list of items from an actor allowing the user to pick one and then opens al of the actor's sheets that contain that item.
-* * **[Swap Map](Swap-Map)** swaps the current background image for the next or base. A naming convention must be followed.
+* **[Open Actor Sheets With...](open-actor-sheets-with...)** fetchs a list of items from an actor allowing the user to pick one and then opens al of the actor's sheets that contain that item.
+* **[Swap Map](swap-map)** swaps the current background image for the next or base. A naming convention must be followed.
 
+https://github.com/Jeznar/Utility-Macros/blob/main/README.md#swap-map
 ## Notes on Functions
 
 ### **Open Actor Sheets With...** 
@@ -37,5 +38,5 @@ File_Name.<SeqNum>.<Extension>
 
 The file name can be whatever, though, it must be a constant across the set of files used by this macro.  It **must** be followed by a period (.) that delimits the next element. The **SeqNum** (sequence number) is an integer, quite likely single digit, but I know of no limit other than patience of the user.  After the SeqNum is another period (.) that marks the beginning of the file **Extension** (e.g. webp, jpeg, png).
 
-A base image is assumed to exist with SeqNum zero (0) or one (1).  If both exist we are clearly dealing with a programmer at the keyboard and zero will be the starting point. 
+A base image is assumed to exist with SeqNum zero (0) or one (1).  If both exist we are clearly dealing with a programmer at the keyboard and zero will be the starting point.
 
