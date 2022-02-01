@@ -7,13 +7,14 @@ This readme contains a summary of the functions and for at least some of them a 
 ## Functions in this Repo
 
 * **[Open Actor Sheets With...](#open-actor-sheets-with...)** fetchs a list of items from an actor allowing the user to pick one and then opens al of the actor's sheets that contain that item.
+* **[Swap Hidden Tokens](#swap-hidden-tokens)** swaps the visibility state of all or selected npc tokens.
 * **[Swap Map](#swap-map)** swaps the current background image for the next or base. A naming convention must be followed.
 
 ## Notes on Functions
 
 ### **Open Actor Sheets With...** 
 
-This macro should be run with a token of interest selected.  The intent of the macro is to make it easier to chec or update all of the users of a given item.  Something I find both common and bothersome. 
+This macro should be run with a token of interest selected.  The intent of the macro is to make it easier to chec or update all of the users of a given item.  Something I find both common and bothersome.
 
 It does the following:
 
@@ -24,6 +25,10 @@ It does the following:
 1. Opens the sheet of all the actors in the *Actors Directory*.
 
 ![Open_Actor_Sheets_With_Example.png](Images/Open_Actor_Sheets_With_Example.png)
+
+### Swap Hidden Tokens
+
+Swaps visible/hidden status for all of the selected NPC tokens, if any tokens are selected.  If no tokens are selected, it swaps visibility for all NPC tokens in the current scene.
 
 ### Swap Map
 

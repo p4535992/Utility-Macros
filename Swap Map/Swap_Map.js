@@ -20,6 +20,13 @@ let targetExists = false
 //----------------------------------------------------------------------------------------
 // Get the existing background image path with file name and burst it into an array
 //
+jez.log("canvas.scene.data.img", canvas.scene.data.img)
+if (!canvas.scene.data.img) {
+    msg = `Background image file is not defined in this scene`
+    console.log(msg)
+    ui.notifications.warn(msg)
+    return
+}
 const PATH_PARTS = canvas.scene.data.img.split("/");
 for (let i = 0; i < PATH_PARTS.length; i++) jez.log(`  PATH_PARTS[${i}]`, PATH_PARTS[i]);
 //----------------------------------------------------------------------------------------
@@ -40,6 +47,7 @@ if (FILE_PARTS < 3) {
     msg = `${FILE_PARTS} is not enough tokens delimited by periods in scene file, must of form: Name.#.ext`
     console.log(msg)
     ui.notifications.error(msg)
+    return
 }
 //----------------------------------------------------------------------------------------
 // Stash the last token as the file extension
@@ -59,6 +67,7 @@ if (Number.isNaN(num)) {
     msg = `Last period delimited token in scene file name (${fileName}) is not a number`
     console.log(msg)
     ui.notifications.error(msg)
+    return
 }
 jez.log("Current Number", num)
 //----------------------------------------------------------------------------------------
