@@ -6,10 +6,9 @@ This readme contains a summary of the functions and for at least some of them a 
 
 ## Functions in this Repo
 
-* **[Open Actor Sheets With...](open-actor-sheets-with...)** fetchs a list of items from an actor allowing the user to pick one and then opens al of the actor's sheets that contain that item.
-* **[Swap Map](swap-map)** swaps the current background image for the next or base. A naming convention must be followed.
+* **[Open Actor Sheets With...](#open-actor-sheets-with...)** fetchs a list of items from an actor allowing the user to pick one and then opens al of the actor's sheets that contain that item.
+* **[Swap Map](#swap-map)** swaps the current background image for the next or base. A naming convention must be followed.
 
-https://github.com/Jeznar/Utility-Macros/blob/main/README.md#swap-map
 ## Notes on Functions
 
 ### **Open Actor Sheets With...** 
